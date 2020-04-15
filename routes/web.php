@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'UsersController@index')->name('index');
+Route::get('export', 'UsersController@export')->name('export');
