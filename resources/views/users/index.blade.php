@@ -3,37 +3,17 @@
 @section('content')
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-white">
             Laravel Excel Export
         </div>
         <div class="card-body">
-            {{-- <h5 class="card-title">Special title treatment</h5> --}}
-            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
             <a class="btn btn-primary mb-1" href="{{ route('export') }}" role="button">Export to Excel</a>
+            <a class="btn btn-primary mb-1" href="{{ route('export_view') }}" role="button">Export From View to Excel</a>
+            <a class="btn btn-primary mb-1" href="{{ route('export_format', 'Csv') }}" role="button">Export CSV</a>
+            <a class="btn btn-primary mb-1" href="{{ route('export_format', 'Html') }}" role="button">Export HTML</a>
+            <a class="btn btn-primary mb-1" href="{{ route('export_format', 'Dompdf') }}" role="button">Export PDF</a>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name </th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Created At</th>
-                        <th scope="col">Updated At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($users  as $user)
-                    <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->created_at }}</td>
-                        <td>{{ $user->updated_at }}</td>
-                    </tr>
-                @endforeach
-            
-                </tbody>
-            </table>
+            @include('users.table', $users)
         </div>
     </div>
     

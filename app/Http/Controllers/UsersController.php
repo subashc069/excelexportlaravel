@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Exports\UsersExport;
+use App\Exports\UsersExportView;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
@@ -23,6 +24,23 @@ class UsersController extends Controller
     public function export()
     {   
         return Excel::download(new UsersExport, 'Users.xlsx');
+    }
+
+    public function export_view()
+    {   
+        return Excel::download(new UsersExportView, 'Users_view_'.now()->toDateString().'.pdf');
+    }
+
+    public function export_format($format)
+    {   
+        $extension = strtolower($format);
+        if(in_array($format, ['Mpdf', 'Dompdf', 'Tcpdf'])) $extension = 'pdf';
+        return Excel::download(new UsersExportView, 'Users_view_'.$extension, $format);
+    }
+
+    public function export_sheets()
+    {   
+        return Excel::download(new UsersExportView, 'Users_view_'.now()->toDateString().'.pdf');
     }
 
     /**
